@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
-echo "-----> Installing docker 17.09.0 from download.docker.com"
-cd $1
-cd vendor
-curl -s -O https://download.docker.com/linux/static/stable/x86_64/docker-17.09.0-ce.tgz
-tar xzf docker-17.09.0-ce.tgz
-rm docker-17.09.0-ce.tgz
 
-mkdir -p docker/lib
-mkdir -p docker/run
+# Heroku buildpack compile script to install docker
 
-./docker/dockerd --data-root $1/docker/lib --exec-root $1/docker/run --pidfile $1/docker/run/docker.pid --containerd $1/docker/run/docker.sock
+echo "-----> Installing docker"
+
+# Install docker
+curl -sSL https://get.docker.com/ | sh
