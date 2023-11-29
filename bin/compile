@@ -12,10 +12,13 @@ echo "-----> Starting Docker rootless mode installation..."
 apt-get update
 
 # Installing necessary packages for Docker installation
+echo "-----> Installing necessary packages for Docker installation..."
 apt-get install -y uidmap
-apt-get install kmod
+apt-get install -y kmod
+apt-get install -y iptables
 
 # Downloading Docker
+echo "-----> Downloading Docker..."
 curl -fsSL https://get.docker.com/rootless | sh
 
 # Logging completion
