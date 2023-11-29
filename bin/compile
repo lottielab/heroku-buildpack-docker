@@ -7,4 +7,19 @@ CACHE_DIR=$2
 # Logging the start of the script
 echo "-----> Starting Docker rootless mode installation..."
 
+
+# Updating package list (assuming a Debian-based stack)
+apt-get update
+
+# Installing necessary packages for Docker installation
+apt-get install -y uidmap
+apt-get install kmod
+
+# Downloading Docker
 curl -fsSL https://get.docker.com/rootless | sh
+
+# Logging completion
+echo "-----> Docker setup completed"
+
+# The script does not handle starting the Docker daemon or running containers,
+# as this is typically beyond the scope of what can be achieved within a Heroku buildpack.
