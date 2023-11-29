@@ -7,30 +7,4 @@ CACHE_DIR=$2
 # Logging the start of the script
 echo "-----> Starting Docker rootless mode installation..."
 
-# Updating package list (assuming a Debian-based stack)
-apt-get update
-
-# Installing necessary packages for Docker installation
-apt-get install -y uidmap
-
-# Downloading Docker
-wget https://download.docker.com/linux/static/stable/x86_64/docker-20.10.7.tgz
-
-# Extracting Docker
-tar -xzvf docker-20.10.7.tgz
-
-# Exporting necessary environment variables for rootless Docker
-export DOCKER_HOST=unix:///run/user/$(id -u)/docker.sock
-export PATH=$BUILD_DIR/docker:$PATH
-
-# Running the rootless Docker installation script
-$BUILD_DIR/docker/dockerd-rootless.sh --experimental
-
-# Building Docker image from the Dockerfile in the app's root directory
-docker build -t myapp $BUILD_DIR
-
-# Logging completion
-echo "-----> Docker setup completed"
-
-# The script does not handle starting the Docker daemon or running containers,
-# as this is typically beyond the scope of what can be achieved within a Heroku buildpack.
+curl -fsSL https://get.docker.com/rootless | sh
